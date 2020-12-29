@@ -32,6 +32,17 @@ read_multi <- function(file_name,file_path){
   
 }
 
+is.valid_list <- function(list, valid_regex){
+  
+  is.valid_df <- function(df, valid_regex){
+    
+    map_lgl(valid_regex , ~ str_detect(names(df), .x) %>% any() ) %>% all()
+    
+  }
+  
+  list %>% map( ~is.valid_df(.x , valid_regex)  )
+}
+
 is.grade.in_list <- function(list,chr){
   
   get_distinct_at <- function(df, ...){
